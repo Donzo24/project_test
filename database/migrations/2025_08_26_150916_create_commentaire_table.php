@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('commentaire', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->date("date_commentaire");
-            $table->unsignedInteger("produit_id");
-            $table->foreign("produit_id")->references("id")->on("produits");
-        });
+        // Schema::create('commentaire', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->timestamps();
+        //     $table->date("date_commentaire");
+        //     $table->unsignedInteger("produit_id");
+        //     $table->foreign("produit_id")->references("id")->on("produits");
+        // });
     }
 
     /**
@@ -25,9 +25,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('commentaire', function (Blueprint $table) {
-            $table->dropForeign(['produit_id']);
-        });
-        Schema::dropIfExists('commentaire');
+        // Schema::table('commentaire', function (Blueprint $table) {
+        //     $table->dropForeign(['produit_id']);
+        // });
+        // Schema::dropIfExists('commentaire');
     }
 };

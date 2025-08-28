@@ -22,7 +22,7 @@ class ProduitCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom' => "required|max:50|",
+            'nom' => "required|max:50",
             'prix' => "required|numeric",
             'description' => "nullable|max:100"
         ];

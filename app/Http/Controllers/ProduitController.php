@@ -9,6 +9,11 @@ use Illuminate\Support\Str;
 
 class ProduitController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware("auth");
+    }
     /**
      * Display a listing of the resource.
      */
@@ -55,7 +60,9 @@ class ProduitController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view("produit_edit", [
+            'produit' => Article::find($id)
+        ]);
     }
 
     /**
@@ -63,7 +70,20 @@ class ProduitController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nom' => "required|string|max:255",
+        ]);
+
+        // Update the product
+        $produit = Article::find($id);
+        $produit->update([
+            'nom' => $request->nom,
+            'prix_vente' => $request->prix,
+            'description' => $request->description,
+            'slug' => Str::slug($request->nom),
+        ]);
+
+        return redirect()->route("produits.index")->with("success", "Produit modifié avec succès");
     }
 
     /**
@@ -71,6 +91,7 @@ class ProduitController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $produit = Article::find($id);
+        $produit->delete();
     }
 }

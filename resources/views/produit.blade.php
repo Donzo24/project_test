@@ -9,6 +9,10 @@
 </head>
 <body>
     <div class="container">
+        <form action="{{ route("logout") }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger">Deconnexion</button>
+        </form>
         <h3 class="alert-info alert mt-5">Gestion des produits</h3>
         <form action="{{ route("produits.store") }}" method="post">
             @csrf
@@ -40,6 +44,7 @@
                     <td>id</td>
                     <td>Nom</td>
                     <td>Prix</td>
+                    <td>Actions</td>
                 </thead>
                 <tbody>
                     @foreach ($produits as $produit)
@@ -47,6 +52,10 @@
                             <td>{{ $produit->id }}</td>
                             <td>{{ $produit->nom }}</td>
                             <td>{{ $produit->prix_vente }}</td>
+                            <td>
+                                <a href="{{ route("produits.edit", $produit->id) }}" class="btn btn-primary">Modifier</a>
+                                <a href="#" data-href="{{ route("produits.destroy", $produit->id) }}" class="btn btn-danger btn-delete">Supprimer</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -54,4 +63,21 @@
         </div>
     </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+       $(".btn-delete").click(function(e) {
+            e.preventDefault();
+            var url = $(this).attr("data-href");
+            $.ajax({
+                url: url,
+                type: "DELETE",
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+
+            });
+       });
+    });
+</script>
 </html>
