@@ -6,4 +6,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource("produit", ProduitController::class);
 
-Route::post("ajouter-produit", [ProduitController::class, 'store']);
+Route::post("ajouter", [ProduitController::class, 'store']);
