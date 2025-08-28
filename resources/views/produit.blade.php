@@ -34,7 +34,10 @@
                 <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            @can('create product')
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            @endcan
+
 
         </form>
 
@@ -53,8 +56,12 @@
                             <td>{{ $produit->nom }}</td>
                             <td>{{ $produit->prix_vente }}</td>
                             <td>
-                                <a href="{{ route("produits.edit", $produit->id) }}" class="btn btn-primary">Modifier</a>
-                                <a href="#" data-href="{{ route("produits.destroy", $produit->id) }}" class="btn btn-danger btn-delete">Supprimer</a>
+                                @can('edit product')
+                                    <a href="{{ route("produits.edit", $produit->id) }}" class="btn btn-primary">Modifier</a>
+                                @endcan
+                                @can('delete product')
+                                    <a href="#" data-href="{{ route("produits.destroy", $produit->id) }}" class="btn btn-danger btn-delete">Supprimer</a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

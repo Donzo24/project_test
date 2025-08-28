@@ -6,14 +6,20 @@ use App\Http\Requests\ProduitCreateRequest;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Str;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use App\Http\Controllers\Controller;
 
 class ProduitController extends Controller
 {
-
     function __construct()
     {
-        $this->middleware("auth");
+        $this->middleware(["role:Admin", 'permission:edit product'])->only(['update', 'edit']);
+        $this->middleware(["role:Admin", 'permission:create product'])->only(['create', 'store']);
+        $this->middleware(["role:Admin", 'permission:view product'])->only(['index']);
+        $this->middleware(["role:Admin", 'permission:delete product']);
     }
+
     /**
      * Display a listing of the resource.
      */
