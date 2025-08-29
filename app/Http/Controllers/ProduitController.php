@@ -14,10 +14,10 @@ class ProduitController extends Controller
 {
     function __construct()
     {
-        $this->middleware(["role:Admin", 'permission:edit product'])->only(['update', 'edit']);
-        $this->middleware(["role:Admin", 'permission:create product'])->only(['create', 'store']);
-        $this->middleware(["role:Admin", 'permission:view product'])->only(['index']);
-        $this->middleware(["role:Admin", 'permission:delete product']);
+        // $this->middleware(["role:Admin", 'permission:edit product'])->only(['update', 'edit']);
+        // $this->middleware(["role:Admin", 'permission:create product'])->only(['create', 'store']);
+        // $this->middleware(["role:Admin", 'permission:view product'])->only(['index']);
+        // $this->middleware(["role:Admin", 'permission:delete product']);
     }
 
     /**

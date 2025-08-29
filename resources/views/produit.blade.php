@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gestion des produits</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-</head>
-<body>
+@extends("layouts.master")
+
+@section("content")
+
     <div class="container">
         <form action="{{ route("logout") }}" method="POST">
             @csrf
@@ -69,22 +63,4 @@
             </table>
         </div>
     </div>
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-       $(".btn-delete").click(function(e) {
-            e.preventDefault();
-            var url = $(this).attr("data-href");
-            $.ajax({
-                url: url,
-                type: "DELETE",
-                data: {
-                    _token: "{{ csrf_token() }}"
-                },
-
-            });
-       });
-    });
-</script>
-</html>
+@endsection
